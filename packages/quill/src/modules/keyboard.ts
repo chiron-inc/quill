@@ -351,6 +351,15 @@ class Keyboard extends Module<KeyboardOptions> {
     this.quill.updateContents(delta, Quill.sources.USER);
     this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
     this.quill.focus();
+
+    // EDIT: 改行前の書式設定を引き継ぐ
+    // 参考: https://github.com/quilljs/quill/blob/0148738cb22d52808f35873adb620ca56b1ae061/modules/keyboard.js#L411-L416
+    Object.keys(context.format).forEach((name) => {
+      if (lineFormats[name] != null) return;
+      if (Array.isArray(context.format[name])) return;
+      if (name === 'link') return;
+      this.quill.format(name, context.format[name], Quill.sources.USER);
+    });
   }
 }
 
