@@ -173,6 +173,9 @@ class Selection {
     this.scroll.optimize();
     this.setNativeRange(this.cursor.textNode, this.cursor.textNode.data.length);
     this.update();
+
+    // EDIT: keyboard.ts の handleEnter で設定したフォーマットをエディタの表示に反映する
+    this.emitter.emit(Emitter.events.EDITOR_CHANGE);
   }
 
   getBounds(index: number, length = 0) {
