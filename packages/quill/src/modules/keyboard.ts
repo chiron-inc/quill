@@ -349,7 +349,8 @@ class Keyboard extends Module<KeyboardOptions> {
       .delete(range.length)
       .insert('\n', lineFormats);
     this.quill.updateContents(delta, Quill.sources.USER);
-    this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+    // EDIT: source を USER にすることで、カーソル位置変更のイベントを発火する
+    this.quill.setSelection(range.index + 1, Quill.sources.USER);
     this.quill.focus();
 
     // EDIT: 改行前の書式設定を引き継ぐ
