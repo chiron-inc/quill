@@ -469,9 +469,9 @@ class Selection {
         source,
       ];
       this.emitter.emit(Emitter.events.EDITOR_CHANGE, ...args);
-      if (source !== Emitter.sources.SILENT) {
-        this.emitter.emit(...args);
-      }
+
+      // EDIT: emit an event SELECTION_CHANGE regardless of source
+      this.emitter.emit(...args);
     }
   }
 }
