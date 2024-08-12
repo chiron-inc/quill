@@ -644,7 +644,8 @@ function matchText(node: HTMLElement, delta: Delta, scroll: ScrollBlot) {
       return replaced.length < 1 && collapse ? ' ' : replaced;
     };
     text = text.replace(/\r\n/g, ' ').replace(/\n/g, ' ');
-    text = text.replace(/\s\s+/g, replacer.bind(replacer, true)); // collapse whitespace
+    // EDIT: 空白を除去しないようにする
+    // text = text.replace(/\s\s+/g, replacer.bind(replacer, true)); // collapse whitespace
     if (
       (node.previousSibling == null &&
         node.parentElement != null &&
